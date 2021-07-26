@@ -1,0 +1,5 @@
+.env
+.env.yaml
+__pycache__
+.vscode
+ea-jobs/

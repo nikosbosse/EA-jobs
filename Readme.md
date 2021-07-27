@@ -13,7 +13,7 @@ For feature requests and feedback, please open an issue on github (go to 'issues
 All contributions welcome! Please open a PR or an issue or get in touch with me directly
 
 ## Acknowledgements
-Thank you very much to [D0TheMath](https://twitter.com/D0TheMath [nathanpmyoung](https://twitter.com/nathanpmYoung), [julianhazell](https://twitter.com/julianhazell) and [genuine_doubt](https://twitter.com/genuine_doubt)
+Thank you very much to [D0TheMath](https://twitter.com/D0TheMath) [nathanpmyoung](https://twitter.com/nathanpmYoung), [julianhazell](https://twitter.com/julianhazell) and [genuine_doubt](https://twitter.com/genuine_doubt)
 
 ## Running / testing the bot on your own
 

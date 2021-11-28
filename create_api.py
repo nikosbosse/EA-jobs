@@ -1,8 +1,11 @@
 import tweepy
 from dotenv import load_dotenv
 import os
+import pandas as pd
 
 def create_api():
+
+    tweepy.debug(True)
     load_dotenv()
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
@@ -14,9 +17,22 @@ def create_api():
     api = tweepy.API(
         auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
-    try:
+    """ try:
         api.verify_credentials()
     except Exception as e:
-        raise e
+        raise e """
     return api
-    
+
+
+def get_api_rate_status(api): 
+    status = (api.rate_limit_status())
+
+    limits = []
+    print(status['rate_limit_context'])
+    for key in status['resources'].keys():
+        df = pd.DataFrame.from_records(status['resources'][key]).transpose()
+        limits.append(df)
+
+    out = pd.concat(limits)
+    out = out[(out['limit'] != out['remaining'])]
+    print(out)

@@ -2,4 +2,5 @@
 .env.yaml
 __pycache__
 .vscode
+reddit_secrets.json
 ea-jobs/

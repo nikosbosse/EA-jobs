@@ -1,11 +1,13 @@
 from create_api import create_api
 from create_api import get_api_rate_status
+from webhook import Webhook
 import tweepy
 
 class jobtweet:    
 
     def __init__(self):
         self.api = create_api()
+        self.webhook = Webhook()
         get_api_rate_status(self.api)
         self.my_last_tweet_id = tweet = self.api.user_timeline(id = self.api.me().id, count = 1)[0]._json['id']      
         print("got my last tweet")  
@@ -40,6 +42,23 @@ class jobtweet:
         self.tweet_ids = set(self.tweet_ids)
         print(self.tweet_ids)
 
+    def post(self, tweet):
+        status = self.api.get_status(tweet, tweet_mode="extended")
+        get_api_rate_status(self.api)
+        tweet_data = {"id": tweet}
+        # if hasattr(status, "retweeted_status"):
+        #     status = status.retweeted_status
+        if hasattr(status, "full_text"):
+            tweet_data["text"] = status.full_text
+        elif hasattr(status, "text"):
+            tweet_data["text"] = status.text
+        else:
+            # This line is being left for debugging.
+            # This code uses outdated dependancies and older Twitter API
+            # calls so the documentation isn't as good.  Will remove once
+            # I'm sure it works properly, and probably make this a return.
+            tweet_data["text"] = "Failed to get text to post."
+        self.webhook.post(tweet_data)
 
     def retweet(self):
         
@@ -51,5 +70,4 @@ class jobtweet:
             
             if not retweeted: 
                 self.api.retweet(id)
-
-
+                self.post(id)

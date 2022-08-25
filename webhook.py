@@ -5,7 +5,7 @@ import requests
 
 class Webhook:
     def __init__(self):
-        self.url = "http://eajobs.ddns.net"
+        self.url = "http://www.effectivejobsboard.org"
         self.headers = {
             "Content-Type": "application/json"
         }
